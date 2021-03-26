@@ -1,9 +1,11 @@
-import { Router } from "express";
-const router = Router();
+const express = require("express");
+const router = express.Router();
 
 //@route    GET api/profile
 //@desc     Test route
 //@access   Public
-router.get('/', (req, res)=>{ res.send('Profile route') });
+router.get('/', (req, res)=>{ 
+    res.send('Profile route') 
+});
 
-export default router;
+module.exports = router;
