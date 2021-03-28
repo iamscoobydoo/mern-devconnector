@@ -4,7 +4,7 @@ const request = require("request");
 const config = require("config");
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
-const User = require("../../models/Users");
+const User = require("../../models/User");
 
 const router = express.Router();
 
@@ -135,7 +135,7 @@ router.get("/user/:user_id", async function (req, res) {
         if (!profile) return res.status(400).json({ msg: "Profile not found" });
         return res.json(profile);
     } catch (err) {
-        if (err.kind == "ObjectId")
+        if (err.kind === "ObjectId")
             return res.status(400).json({ msg: "Profile not found" });
         console.error(err.message);
         res.status(500).send("Internal Server Error");

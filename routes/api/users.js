@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 const config = require("config");
 const router = express.Router();
 
-const User = require("../../models/Users");
+const User = require("../../models/User");
 
 //@route    POST api/users
 //@desc     Register user
