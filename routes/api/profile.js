@@ -316,7 +316,6 @@ router.get("/github/:githubusername", async function (req, res) {
             if (response.statusCode !== 200) {
                 return res.status(404).json({ msg: "No Github profile found" });
             }
-            console.log(options.uri);
             return res.json(JSON.parse(body));
         });
     } catch (err) {
