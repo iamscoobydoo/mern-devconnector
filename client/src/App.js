@@ -6,6 +6,7 @@ import Navbar from "./Components/Layout/Navbar";
 import Landing from "./Components/Layout/Landing";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
+import Alert from "./Components/Layout/Alert";
 import "./App.css";
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
                     <Navbar />
                     <Route exact path='/' component={Landing} />
                     <section className='container'>
+                        <Alert />
                         <Switch>
                             <Route
                                 exact
