@@ -31,12 +31,14 @@ export default function (state = initialState, action) {
         case ALERT.REGISTER_FAILURE:
         case ALERT.LOGIN_FAILURE:
         case ALERT.AUTH_ERROR:
+        case ALERT.LOGOUT:
             localStorage.removeItem("token");
             return {
                 ...state,
                 token: null,
                 isAuthenticated: false,
                 loading: false,
+                user: null,
             };
 
         default:
