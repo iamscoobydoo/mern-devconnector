@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
             };
 
         case ALERT.REGISTER_SUCCESS:
+        case ALERT.LOGIN_SUCCESS:
             localStorage.setItem("token", payload.token);
             return {
                 ...state,
@@ -28,6 +29,7 @@ export default function (state = initialState, action) {
             };
 
         case ALERT.REGISTER_FAILURE:
+        case ALERT.LOGIN_FAILURE:
         case ALERT.AUTH_ERROR:
             localStorage.removeItem("token");
             return {
