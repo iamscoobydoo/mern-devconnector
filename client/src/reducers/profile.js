@@ -23,6 +23,13 @@ export default function profileReducer(state = initialState, action) {
                 error: payload,
                 loading: false,
             };
+        case ALERT.CLEAR_PROFILE:
+            return {
+                ...state,
+                profile: null,
+                repos: null,
+                loading: false,
+            };
         default:
             return state;
     }
