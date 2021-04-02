@@ -12,6 +12,7 @@ export default function profileReducer(state = initialState, action) {
     const { type, payload } = action;
     switch (type) {
         case ALERT.GET_PROFILE:
+        case ALERT.UPDATE_PROFILE:
             return {
                 ...state,
                 profile: payload,

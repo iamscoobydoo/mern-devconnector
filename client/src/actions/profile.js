@@ -53,3 +53,71 @@ export const createProfile = (formData, history, edit = false) => async (dispatc
         });
     }
 };
+
+//add experience
+export const addExperience = (formData, history) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const res = await axios.put("/api/profile/experience", formData, config);
+        dispatch({
+            type: ALERT.UPDATE_PROFILE,
+            payload: res.data,
+        });
+
+        dispatch(setAlert("Experience Added", "success"));
+
+        history.push("/dashboard");
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach((error) => {
+                dispatch(setAlert(error.msg, "danger"));
+            });
+        }
+
+        dispatch({
+            type: ALERT.PROFILE_ERROR,
+            payload: { status: err.response.status, msg: err.response.statusText },
+        });
+    }
+};
+
+//add education
+export const addEducation = (formData, history) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const res = await axios.put("/api/profile/education", formData, config);
+        dispatch({
+            type: ALERT.UPDATE_PROFILE,
+            payload: res.data,
+        });
+
+        dispatch(setAlert("Education Added", "success"));
+
+        history.push("/dashboard");
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if (errors) {
+            errors.forEach((error) => {
+                dispatch(setAlert(error.msg, "danger"));
+            });
+        }
+
+        dispatch({
+            type: ALERT.PROFILE_ERROR,
+            payload: { status: err.response.status, msg: err.response.statusText },
+        });
+    }
+};
