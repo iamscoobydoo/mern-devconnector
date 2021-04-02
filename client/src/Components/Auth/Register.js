@@ -42,11 +42,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <p className='lead'>
                 <i className='fas fa-user'></i> Create Your Account
             </p>
-            <form
-                className='form'
-                action='create-profile.html'
-                onSubmit={handleSubmit}
-            >
+            <form className='form' action='create-profile.html' onSubmit={handleSubmit}>
                 <div className='form-group'>
                     <input
                         type='text'
@@ -67,8 +63,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         required
                     />
                     <small className='form-text'>
-                        This site uses Gravatar so if you want a profile image,
-                        use a Gravatar email
+                        This site uses Gravatar so if you want a profile image, use a Gravatar email
                     </small>
                 </div>
                 <div className='form-group'>
@@ -95,11 +90,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         required
                     />
                 </div>
-                <input
-                    type='submit'
-                    className='btn btn-primary'
-                    value='Register'
-                />
+                <input type='submit' className='btn btn-primary' value='Register' />
             </form>
             <p className='my-1'>
                 Already have an account? <Link to='/login'>Sign In</Link>
