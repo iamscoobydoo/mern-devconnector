@@ -2,25 +2,46 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { createProfile } from "../../actions/profile";
+import { createProfile, getCurrentProfile } from "../../actions/profile";
 
-const CreateProfile = ({ createProfile, history }) => {
-    const [formData, setFormData] = React.useState({
-        company: "",
-        website: "",
-        location: "",
-        status: "",
-        skills: "",
-        githubusername: "",
-        bio: "",
-        twitter: "",
-        facebook: "",
-        linkedin: "",
-        youtube: "",
-        instagram: "",
-    });
+const initialState = {
+    company: "",
+    website: "",
+    location: "",
+    status: "",
+    skills: "",
+    githubusername: "",
+    bio: "",
+    twitter: "",
+    facebook: "",
+    linkedin: "",
+    youtube: "",
+    instagram: "",
+};
+
+const EditProfile = ({
+    profile: { profile, loading },
+    createProfile,
+    getCurrentProfile,
+    history,
+}) => {
+    const [formData, setFormData] = React.useState(initialState);
 
     const [displaySocialFields, toggleDisplaySocialFields] = React.useState(false);
+
+    React.useEffect(() => {
+        if (!profile) getCurrentProfile();
+        if (!loading) {
+            const profileData = { ...initialState };
+            for (const key in profile) {
+                if (key in profileData) profileData[key] = profile[key];
+            }
+            for (const key in profile.social) {
+                if (key in profileData) profileData[key] = profile.social[key];
+            }
+            setFormData(profileData);
+        }
+    }, [loading, getCurrentProfile, profile]);
 
     const {
         company,
@@ -46,7 +67,7 @@ const CreateProfile = ({ createProfile, history }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createProfile(formData, history);
+        createProfile(formData, history, true); //true indicates edit
     };
 
     return (
@@ -218,8 +239,16 @@ const CreateProfile = ({ createProfile, history }) => {
     );
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
+
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+    withRouter(EditProfile)
+);
