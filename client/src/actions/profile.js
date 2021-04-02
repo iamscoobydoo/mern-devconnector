@@ -164,6 +164,7 @@ export const deleteEducation = (id) => async (dispatch) => {
 export const deleteAccount = () => async (dispatch) => {
     if (window.confirm("Are you sure? This can NOT be undone!")) {
         try {
+            // eslint-disable-next-line no-unused-vars
             const res = await axios.delete("api/profile");
 
             dispatch({ type: ALERT.CLEAR_PROFILE });
