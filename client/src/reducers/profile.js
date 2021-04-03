@@ -18,6 +18,18 @@ export default function profileReducer(state = initialState, action) {
                 profile: payload,
                 loading: false,
             };
+        case ALERT.GET_PROFILE:
+            return {
+                ...state,
+                profiles: payload,
+                loading: false,
+            };
+        case ALERT.GET_REPOS:
+            return {
+                ...state,
+                repos: payload,
+                loading: false,
+            };
         case ALERT.PROFILE_ERROR:
             return {
                 ...state,
