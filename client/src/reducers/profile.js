@@ -18,7 +18,7 @@ export default function profileReducer(state = initialState, action) {
                 profile: payload,
                 loading: false,
             };
-        case ALERT.GET_PROFILE:
+        case ALERT.GET_PROFILES:
             return {
                 ...state,
                 profiles: payload,
