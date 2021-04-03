@@ -11,6 +11,7 @@ export const getCurrentProfile = () => async (dispatch) => {
             payload: res.data,
         });
     } catch (err) {
+        dispatch({ type: ALERT.CLEAR_PROFILE });
         dispatch({
             type: ALERT.PROFILE_ERROR,
             payload: { status: err.response.status, msg: err.response.statusText },
