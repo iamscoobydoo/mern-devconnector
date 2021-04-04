@@ -30,6 +30,11 @@ export default function profileReducer(state = initialState, action) {
                 repos: payload,
                 loading: false,
             };
+        case ALERT.NO_REPOS:
+            return {
+                ...state,
+                repos: [],
+            };
         case ALERT.PROFILE_ERROR:
             return {
                 ...state,

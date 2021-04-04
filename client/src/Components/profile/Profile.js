@@ -6,6 +6,7 @@ import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 import Loading from "../layout/Loading";
 import { getProfileById } from "../../actions/profile";
 
@@ -33,9 +34,11 @@ const Profile = ({ match, getProfileById, profile: { profile, loading }, auth })
                     <div className='profile-grid my-1'>
                         <ProfileTop profile={profile} />
                         <ProfileAbout profile={profile} />
-
                         <ProfileExperience experience={profile.experience} />
                         <ProfileEducation education={profile.education} />
+                        {profile.githubusername && (
+                            <ProfileGithub username={profile.githubusername} />
+                        )}
                     </div>
                 </>
             )}
