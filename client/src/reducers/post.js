@@ -16,6 +16,12 @@ export default function postReducer(state = initialState, action) {
                 posts: payload,
                 loading: false,
             };
+        case ALERT.GET_POST:
+            return {
+                ...state,
+                post: payload,
+                loading: false,
+            };
         case ALERT.ADD_POST:
             return {
                 ...state,
@@ -28,6 +34,21 @@ export default function postReducer(state = initialState, action) {
                 posts: state.posts.map((post) =>
                     post._id === payload.postId ? { ...post, likes: payload.likes } : post
                 ),
+                loading: false,
+            };
+        case ALERT.ADD_COMMENT:
+            return {
+                ...state,
+                post: { ...state.post, comments: payload },
+                loading: false,
+            };
+        case ALERT.REMOVE_COMMENT:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: state.post.comments.filter((comment) => comment._id !== payload),
+                },
                 loading: false,
             };
         case ALERT.DELETE_POST:
