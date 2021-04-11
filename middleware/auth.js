@@ -1,5 +1,5 @@
+require("dotenv").config({ path: "../.env" });
 const jwt = require("jsonwebtoken");
-const config = require("config");
 
 module.exports = function (req, res, next) {
     //get token from header
@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
 
     //verify token
     try {
-        const decoded = jwt.verify(token, config.get("jwtKey"));
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded.user;
         next();
     } catch (err) {

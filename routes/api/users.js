@@ -1,9 +1,9 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-const config = require("config");
 const router = express.Router();
 
 const User = require("../../models/User");
@@ -16,10 +16,7 @@ router.post(
     [
         check("name", "Name is Empty").not().isEmpty(),
         check("email", "Please enter a valid email").isEmail(),
-        check(
-            "password",
-            "Please enter a password with 6 or more characters"
-        ).isLength({ min: 6 }),
+        check("password", "Please enter a password with 6 or more characters").isLength({ min: 6 }),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -60,15 +57,10 @@ router.post(
                     id: user.id,
                 },
             };
-            jwt.sign(
-                payload,
-                config.get("jwtKey"),
-                { expiresIn: 36000 },
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({ token });
-                }
-            );
+            jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 }, (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            });
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server Error!");

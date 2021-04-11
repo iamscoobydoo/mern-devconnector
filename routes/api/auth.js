@@ -1,7 +1,7 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const config = require("config");
 const { check, validationResult } = require("express-validator");
 
 const auth = require("../../middleware/auth");
@@ -59,15 +59,10 @@ router.post(
                     id: user.id,
                 },
             };
-            jwt.sign(
-                payload,
-                config.get("jwtKey"),
-                { expiresIn: 36000 },
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({ token });
-                }
-            );
+            jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 }, (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            });
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server Error!");
